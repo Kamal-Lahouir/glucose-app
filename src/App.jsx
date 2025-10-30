@@ -3,11 +3,13 @@ import GlucoseForm from './components/GlucoseForm'
 import GlucoseLog from './components/GlucoseLog'
 import UserManager from './components/UserManager'
 import CSVImport from './components/CSVImport'
+import GlucoseVisualization from './components/GlucoseVisualization'
 
 const App = () => {
   const [users, setUsers] = useState([])
   const [selectedUser, setSelectedUser] = useState(null)
   const [entries, setEntries] = useState([])
+  const [activeTab, setActiveTab] = useState('data') // 'data' or 'visualization'
 
   // Load data from localStorage on component mount
   useEffect(() => {
@@ -112,12 +114,38 @@ const App = () => {
         onAddUser={handleAddUser}
       />
 
+      {/* Tab Navigation */}
+      <div className="tab-navigation">
+        <button
+          className={`tab-button ${activeTab === 'data' ? 'active' : ''}`}
+          onClick={() => setActiveTab('data')}
+        >
+          Data Entry & Logs
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'visualization' ? 'active' : ''}`}
+          onClick={() => setActiveTab('visualization')}
+        >
+          Visualizations & Insights
+        </button>
+      </div>
+
       <main className="app-main">
-        <div className="left-panel">
-          <GlucoseForm selectedUser={selectedUser} onSubmit={handleSubmit} />
-          <CSVImport selectedUser={selectedUser} onImport={handleCSVImport} />
-        </div>
-        <GlucoseLog entries={entries} users={users} onDelete={handleDelete} />
+        {activeTab === 'data' ? (
+          <>
+            <div className="left-panel">
+              <GlucoseForm selectedUser={selectedUser} onSubmit={handleSubmit} />
+              <CSVImport selectedUser={selectedUser} onImport={handleCSVImport} />
+            </div>
+            <GlucoseLog entries={entries} users={users} onDelete={handleDelete} />
+          </>
+        ) : (
+          <GlucoseVisualization
+            entries={entries}
+            users={users}
+            selectedUser={selectedUser}
+          />
+        )}
       </main>
     </div>
   )
