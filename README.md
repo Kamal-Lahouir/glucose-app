@@ -10,11 +10,15 @@ The app is automatically deployed to GitHub Pages whenever changes are pushed to
 
 ## Features
 
-- **Add Measurements**: Record glucose levels with custom names/identifiers
-- **Time Periods**: Specify when the measurement was taken (before/after meals)
+- **Multi-User Support**: Create and manage multiple users/profiles
+- **Add Measurements**: Record glucose levels manually with optional medication tracking
+- **CSV Import**: Import glucose data from other apps (supports standard CSV format)
+- **Duplicate Detection**: Automatically skips duplicate entries when importing
+- **Time Periods**: Specify when the measurement was taken (before/after breakfast/lunch/dinner)
+- **Medication Tracking**: Optional support for up to 3 medications per entry
 - **Persistent Storage**: All data is saved locally in your browser
-- **View Logs**: Browse all your recorded measurements in a clean table view
-- **Excel Export**: Export all your data to an Excel spreadsheet for easy sharing or analysis
+- **User Filtering**: View logs for specific users or all users
+- **Excel Export**: Export filtered data to Excel spreadsheet with medication information
 - **Delete Entries**: Remove individual measurements as needed
 
 ## Installation
@@ -49,21 +53,50 @@ npm run preview
 
 ## How to Use
 
-1. **Add a Measurement**:
-   - Enter a name or identifier (like a patient name or file reference)
+### Getting Started
+
+1. **Create a User**:
+   - Click "+ Add User" in the user selector at the top
+   - Enter a name for the user (e.g., your name or a family member's name)
+   - Click "Save"
+   - The new user will be automatically selected
+
+2. **Select a User**:
+   - Use the dropdown at the top to switch between users
+   - Your selection is saved and will be remembered when you return
+
+### Adding Measurements Manually
+
+1. **Record a Measurement**:
+   - Make sure a user is selected
    - Enter your glucose level in mg/dL
    - Select the time period (before/after breakfast/lunch/dinner)
+   - Optionally, click "Add Medications" to record any medications taken
    - Click "Submit Measurement"
 
-2. **View Your Logs**:
+### Importing from CSV
+
+1. **Import Your Data**:
+   - Select the user you want to import data for
+   - Click "Import CSV" button
+   - Choose your CSV file (format: Date and Time, Time of the Day, Blood Sugar Value, Measurement Unit, Medications)
+   - The app will show how many entries were imported and how many duplicates were skipped
+
+### Viewing and Managing Logs
+
+1. **View Logs**:
    - All measurements are displayed in the log table
-   - Shows name, glucose level, time period, and timestamp
+   - Use the user filter dropdown to view:
+     - "All Users" - see all measurements from all users
+     - Specific user - see only that user's measurements
+   - Table shows: User, Glucose Level, Time Period, Date & Time, Medications
 
-3. **Export to Excel**:
-   - Click the "Export to Excel" button to download all your data
-   - The file will be named with the current date
+2. **Export to Excel**:
+   - Select the user filter (or "All Users")
+   - Click "Export to Excel" to download the filtered data
+   - The file includes all measurement details and medications
 
-4. **Delete Entries**:
+3. **Delete Entries**:
    - Click the "Delete" button next to any entry to remove it
    - You'll be asked to confirm before deletion
 
