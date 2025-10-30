@@ -1,6 +1,6 @@
 # Glucose Tracker App
 
-A simple and intuitive web application for tracking blood glucose measurements.
+A comprehensive web application for tracking blood glucose measurements with **cloud sync across all your devices**.
 
 ## Live Demo
 
@@ -8,23 +8,33 @@ A simple and intuitive web application for tracking blood glucose measurements.
 
 The app is automatically deployed to GitHub Pages whenever changes are pushed to the main branch.
 
-## Features
+## Key Features
 
+### 🌐 Cloud Sync
+- **Access from anywhere**: Sign in on your laptop, phone, or tablet - your data is always in sync
+- **Never lose data**: All measurements automatically backed up to the cloud
+- **Secure authentication**: Email/password login keeps your data private
+- **Automatic migration**: Existing local data is seamlessly moved to cloud on first login
+
+### 📊 Comprehensive Tracking
 - **Multi-User Support**: Create and manage multiple users/profiles
 - **Add Measurements**: Record glucose levels manually with optional medication tracking
 - **CSV Import**: Import glucose data from other apps (supports standard CSV format)
 - **Duplicate Detection**: Automatically skips duplicate entries when importing
 - **Time Periods**: Specify when the measurement was taken (before/after breakfast/lunch/dinner)
 - **Medication Tracking**: Optional support for up to 3 medications per entry
-- **Persistent Storage**: All data is saved locally in your browser
+
+### 📈 Visualizations & Insights
+- **Glucose trend chart** over time with target range indicators
+- **Statistics dashboard** (average, min, max, total readings)
+- **Time period analysis** showing averages by time of day
+- **Flexible date range filtering** (7, 14, 30, 60, 90, 365 days)
+
+### 💾 Data Management
 - **User Filtering**: View logs for specific users or all users
 - **Excel Export**: Export filtered data to Excel spreadsheet with medication information
 - **Delete Entries**: Remove individual measurements as needed
-- **Visualizations & Insights**: Interactive charts and statistics to track your glucose progress
-  - Glucose trend chart over time with target range indicators
-  - Statistics dashboard (average, min, max, total readings)
-  - Time period analysis showing averages by time of day
-  - Flexible date range filtering (7, 14, 30, 60, 90, 365 days)
+- **Real-time sync status**: Visual feedback when data is syncing to cloud
 
 ## Installation
 
@@ -33,6 +43,20 @@ The app is automatically deployed to GitHub Pages whenever changes are pushed to
    ```bash
    npm install
    ```
+
+## Firebase Setup (Required for Cloud Sync)
+
+To enable cloud sync across devices, you need to set up Firebase:
+
+1. **Create a Firebase project** at [Firebase Console](https://console.firebase.google.com/)
+2. **Enable Email/Password authentication** in Authentication settings
+3. **Create a Firestore database** in Firestore Database settings
+4. **Get your Firebase config** from Project Settings > General > Your apps
+5. **Update the config** in `src/firebase/config.js` with your Firebase credentials
+
+**Detailed step-by-step instructions**: See [FIREBASE_SETUP.md](FIREBASE_SETUP.md)
+
+**Note**: Without Firebase setup, the app will require authentication but won't sync data. Set up Firebase to enable the full cross-device experience!
 
 ## Usage
 
@@ -139,11 +163,12 @@ npm run preview
 
 ## Technologies Used
 
-- React 19
-- Vite
-- Recharts (for data visualization)
-- XLSX (for Excel export)
-- Local Storage API (for data persistence)
+- **React 19**: Modern UI framework
+- **Vite**: Fast build tool and dev server
+- **Firebase**: Cloud sync, authentication, and Firestore database
+- **Recharts**: Interactive data visualization
+- **XLSX**: Excel export functionality
+- **Local Storage API**: Client-side data caching
 
 ## License
 
