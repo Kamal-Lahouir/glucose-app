@@ -20,6 +20,11 @@ The app is automatically deployed to GitHub Pages whenever changes are pushed to
 - **User Filtering**: View logs for specific users or all users
 - **Excel Export**: Export filtered data to Excel spreadsheet with medication information
 - **Delete Entries**: Remove individual measurements as needed
+- **Visualizations & Insights**: Interactive charts and statistics to track your glucose progress
+  - Glucose trend chart over time with target range indicators
+  - Statistics dashboard (average, min, max, total readings)
+  - Time period analysis showing averages by time of day
+  - Flexible date range filtering (7, 14, 30, 60, 90, 365 days)
 
 ## Installation
 
@@ -100,10 +105,43 @@ npm run preview
    - Click the "Delete" button next to any entry to remove it
    - You'll be asked to confirm before deletion
 
+### Visualizing Your Progress
+
+1. **Access Visualizations**:
+   - Click the "Visualizations & Insights" tab at the top
+   - View your glucose trends and statistics in interactive charts
+
+2. **Glucose Trend Chart**:
+   - See your glucose measurements plotted over time
+   - Reference lines show target ranges:
+     - Green line (70 mg/dL) - Low threshold
+     - Orange line (100 mg/dL) - Target level
+     - Red line (140 mg/dL) - High threshold
+   - Hover over data points to see detailed information
+
+3. **Statistics Dashboard**:
+   - View key metrics at a glance:
+     - Average glucose level
+     - Minimum reading
+     - Maximum reading
+     - Total number of readings
+   - Statistics update automatically based on your filters
+
+4. **Time Period Analysis**:
+   - Bar chart shows average glucose by time of day
+   - Compare readings before/after meals
+   - Identify patterns to optimize your glucose management
+
+5. **Filter Your Data**:
+   - Select date range: Last 7, 14, 30, 60, 90 days, or full year
+   - Toggle "Show all users" to compare multiple users' data
+   - Charts and statistics update in real-time
+
 ## Technologies Used
 
 - React 19
 - Vite
+- Recharts (for data visualization)
 - XLSX (for Excel export)
 - Local Storage API (for data persistence)
 
