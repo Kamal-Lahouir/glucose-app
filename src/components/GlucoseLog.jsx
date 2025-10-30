@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as XLSX from 'xlsx'
 
-const GlucoseLog = ({ entries, onDelete }) => {
+const GlucoseLog = ({ entries, users, onDelete }) => {
+  const [filterUserId, setFilterUserId] = useState('all')
+
   const formatDate = (isoString) => {
     const date = new Date(isoString)
     return date.toLocaleString('en-US', {
@@ -19,19 +21,41 @@ const GlucoseLog = ({ entries, onDelete }) => {
     ).join(' ')
   }
 
+  const getUserName = (userId) => {
+    const user = users.find(u => u.id === userId)
+    return user ? user.name : 'Unknown'
+  }
+
+  const filteredEntries = filterUserId === 'all'
+    ? entries
+    : entries.filter(entry => entry.userId === parseInt(filterUserId))
+
   const exportToExcel = () => {
-    if (entries.length === 0) {
+    if (filteredEntries.length === 0) {
       alert('No data to export')
       return
     }
 
     // Prepare data for Excel
-    const excelData = entries.map(entry => ({
-      'Name': entry.name,
-      'Glucose Level (mg/dL)': entry.measurement,
-      'Time Period': formatTimePeriod(entry.timePeriod),
-      'Date & Time': formatDate(entry.timestamp)
-    }))
+    const excelData = filteredEntries.map(entry => {
+      const row = {
+        'User': getUserName(entry.userId),
+        'Date and Time': formatDate(entry.timestamp),
+        'Time of the Day': formatTimePeriod(entry.timePeriod),
+        'Blood Sugar Value': entry.measurement,
+        'Measurement Unit': 'mg/dL'
+      }
+
+      // Add medications if present
+      if (entry.medications && entry.medications.length > 0) {
+        entry.medications.forEach((med, idx) => {
+          row[`Medication ${idx + 1}`] = med.name
+          row[`Medication ${idx + 1} Units`] = med.units
+        })
+      }
+
+      return row
+    })
 
     // Create worksheet
     const ws = XLSX.utils.json_to_sheet(excelData)
@@ -57,32 +81,60 @@ const GlucoseLog = ({ entries, onDelete }) => {
     <div className="glucose-log">
       <div className="log-header">
         <h2>Glucose Log</h2>
-        <button onClick={exportToExcel} className="btn-export">
-          Export to Excel
-        </button>
+        <div className="log-controls">
+          <select
+            value={filterUserId}
+            onChange={(e) => setFilterUserId(e.target.value)}
+            className="user-filter"
+          >
+            <option value="all">All Users</option>
+            {users.map(user => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
+          </select>
+          <button onClick={exportToExcel} className="btn-export">
+            Export to Excel
+          </button>
+        </div>
       </div>
 
-      {entries.length === 0 ? (
+      {filteredEntries.length === 0 ? (
         <p className="no-entries">No measurements recorded yet.</p>
       ) : (
         <div className="log-entries">
           <table>
             <thead>
               <tr>
-                <th>Name</th>
+                <th>User</th>
                 <th>Glucose Level (mg/dL)</th>
                 <th>Time Period</th>
                 <th>Date & Time</th>
+                <th>Medications</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {entries.map(entry => (
+              {filteredEntries.map(entry => (
                 <tr key={entry.id}>
-                  <td>{entry.name}</td>
+                  <td>{getUserName(entry.userId)}</td>
                   <td>{entry.measurement}</td>
                   <td>{formatTimePeriod(entry.timePeriod)}</td>
                   <td>{formatDate(entry.timestamp)}</td>
+                  <td>
+                    {entry.medications && entry.medications.length > 0 ? (
+                      <div className="medications-cell">
+                        {entry.medications.map((med, idx) => (
+                          <div key={idx} className="medication-item">
+                            {med.name}: {med.units}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <span className="no-meds">—</span>
+                    )}
+                  </td>
                   <td>
                     <button
                       onClick={() => handleDelete(entry.id)}

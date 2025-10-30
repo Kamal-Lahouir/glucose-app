@@ -45,8 +45,160 @@ body {
 
 @media (min-width: 768px) {
   .app-main {
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 450px 1fr;
   }
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* User Manager Styles */
+.user-manager {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.user-selector label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 600;
+}
+
+.user-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.user-controls select {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.user-controls select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.btn-add-user {
+  padding: 10px 16px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+
+.btn-add-user:hover {
+  background: #5568d3;
+}
+
+.add-user-form {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.add-user-form input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.add-user-form input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-save {
+  flex: 1;
+  padding: 10px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-save:hover {
+  background: #059669;
+}
+
+.btn-cancel {
+  flex: 1;
+  padding: 10px;
+  background: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-cancel:hover {
+  background: #4b5563;
+}
+
+/* CSV Import Styles */
+.csv-import {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.btn-import {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-import:hover {
+  background: #d97706;
+}
+
+.btn-import:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.import-hint {
+  margin-top: 10px;
+  color: #6b7280;
+  font-size: 0.85rem;
 }
 
 /* Glucose Form Styles */
@@ -112,6 +264,115 @@ body {
   transform: translateY(0);
 }
 
+.btn-submit:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-submit:disabled:hover {
+  box-shadow: none;
+}
+
+.form-hint {
+  margin-top: 10px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+/* Medications Section */
+.medications-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn-toggle-medications {
+  width: 100%;
+  padding: 10px;
+  background: #f3f4f6;
+  color: #374151;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-toggle-medications:hover {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+.btn-toggle-medications:disabled {
+  background: #f9fafb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.medications-list {
+  margin-top: 15px;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 6px;
+}
+
+.medication-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.medication-row input {
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.medication-row input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.btn-remove-med {
+  width: 32px;
+  height: 32px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+
+.btn-remove-med:hover {
+  background: #dc2626;
+}
+
+.btn-add-medication {
+  width: 100%;
+  padding: 8px;
+  background: #e5e7eb;
+  color: #374151;
+  border: 1px dashed #9ca3af;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-add-medication:hover {
+  background: #d1d5db;
+  border-color: #6b7280;
+}
+
 /* Glucose Log Styles */
 .glucose-log {
   background: white;
@@ -132,6 +393,28 @@ body {
 .log-header h2 {
   color: #333;
   font-size: 1.5rem;
+}
+
+.log-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.user-filter {
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.user-filter:focus {
+  outline: none;
+  border-color: #667eea;
 }
 
 .btn-export {
@@ -201,6 +484,20 @@ tbody tr:hover {
 
 .btn-delete:hover {
   background: #dc2626;
+}
+
+/* Medications in Table */
+.medications-cell {
+  font-size: 0.85rem;
+}
+
+.medication-item {
+  padding: 2px 0;
+  color: #6b7280;
+}
+
+.no-meds {
+  color: #d1d5db;
 }
 
 /* Responsive adjustments */
