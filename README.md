@@ -2,6 +2,12 @@
 
 A simple and intuitive web application for tracking blood glucose measurements.
 
+## Live Demo
+
+**Access the app here:** https://kamal-lahouir.github.io/glucose-app/
+
+The app is automatically deployed to GitHub Pages whenever changes are pushed to the main branch.
+
 ## Features
 
 - **Add Measurements**: Record glucose levels with custom names/identifiers

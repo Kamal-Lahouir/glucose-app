@@ -1,7 +1,7 @@
 {
   "name": "glucose-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple and intuitive web application for tracking blood glucose measurements",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
@@ -10,8 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://local_proxy@127.0.0.1:20491/git/Kamal-Lahouir/glucose-app"
+    "url": "https://github.com/Kamal-Lahouir/glucose-app"
   },
+  "homepage": "https://kamal-lahouir.github.io/glucose-app/",
   "keywords": [],
   "author": "",
   "license": "ISC",
